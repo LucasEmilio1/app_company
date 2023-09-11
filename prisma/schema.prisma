@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum group_type {
+  pc
+  kg
+  Veic
+  pla
+}
+
+enum product_type {
+  MP
+  PA
+  PI
+  PV
+  SC
+  SV
+}
+
+model Group {
+  id         String     @id @default(uuid())
+  group_name String
+  group_type group_type
+
+  @@map("Groups")
+}
+
+model Storage {
+  id           String @id @default(uuid())
+  storage_code String @default(uuid())
+  storage_name String
+
+  @@map("Storages")
+}
+
+model Products {
+  id           String       @id @default(uuid())
+  product_name String
+  product_type product_type
+
+  @@map("Products")
+}
